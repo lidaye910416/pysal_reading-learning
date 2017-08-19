@@ -23,7 +23,7 @@ class FileIO_MetaCls(type):
     All subclasses of FileIO also inherit this meta class, which registers their abilities with the FileIO registry.
     Subclasses must contain FORMATS and MODES (both are type(list))
     """
-    def __new__(mcs, name, bases, dict):
+    def __new__(mcs, name, bases, dict):#学习有关__new__的方法
         cls = type.__new__(mcs, name, bases, dict)
         if name != 'FileIO' and name != 'DataTable':
             if "FORMATS" in dict and "MODES" in dict:
