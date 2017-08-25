@@ -24,15 +24,15 @@ class FileIO_MetaCls(type):
     Subclasses must contain FORMATS and MODES (both are type(list))
     """
     def __new__(mcs, name, bases, dict):#学习有关__new__的方法
-        cls = type.__new__(mcs, name, bases, dict)
-        if name != 'FileIO' and name != 'DataTable':
-            if "FORMATS" in dict and "MODES" in dict:
+        cls = type.__new__(mcs, name, bases, dict)#涉及到创建元类到方法。
+        '''详情见廖雪峰到博客 '''
+        if name != 'FileIO' and name != 'DataTable':#当类的名称不等于二者时
+            if "FORMATS" in dict and "MODES" in dict:#当类的方法中不包含二者时
                 #print "Registering %s with FileIO.\n\tFormats: %r\n\tModes: %r"%(name,dict['FORMATS'],dict['MODES'])
                 FileIO._register(cls, dict['FORMATS'], dict['MODES'])
             else:
                 raise TypeError("FileIO subclasses must have FORMATS and MODES defined")
-        return cls
-
+        return cls #重写了type的__new__方法。
 
 class FileIO(object):  # should be a type?
     """
